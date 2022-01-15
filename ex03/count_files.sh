@@ -1,2 +1,1 @@
-#!/bin/bash
-find . | wc -l
+find . -print | awk 'END {print NR}'
