@@ -1,1 +1,1 @@
-cat /etc/passwd | grep -v '#' | sed '1!n;d' | cut -d ':' -f1 | rev | sort -r | sed -n "$FT_LINE1,$FT_LINE2"p | sed 's/$/, /' | tr -d '\n' | sed 's/, $/./'
+cat /etc/passwd | grep -v '\#' | awk "NR % 2 == 0" | cut -d':' -f1 | rev | sort -r | awk 'NR>= ENVIRON["FT_LINE1"] && NR<= ENVIRON["FT_LINE2"]' | paste -s -d"," - | sed 's/,/, /g' | sed 's/$/./' | tr -d '\n'
